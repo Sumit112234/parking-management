@@ -33,14 +33,24 @@ export async function POST(request) {
     )
 
     // Set the token as a cookie
-    cookies().set({
-      name: "session",
-      value: token,
-      httpOnly: true,
-      path: "/",
-      secure: process.env.NODE_ENV === "production",
-      maxAge: 60 * 60 * 24 * 7, // 1 week
-    })
+    // cookies().set({
+    //   name: "session",
+    //   value: token,
+    //   httpOnly: true,
+    //   path: "/",
+    //   secure: process.env.NODE_ENV === "production",
+    //   maxAge: 60 * 60 * 24 * 7, // 1 week
+    // })
+    cookies().set(
+      "session",
+      token,
+      {
+        httpOnly: true,
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+        maxAge: 60 * 60 * 24 * 7, // 1 week
+      }
+    )
 
     // Return user data (excluding password)
     const { password: _, ...userWithoutPassword } = user

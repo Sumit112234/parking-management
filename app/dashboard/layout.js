@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken"
 
 export default async function DashboardLayout({ children }) {
   // Server-side authentication check
-  const sessionCookie = cookies().get("session")
+  const sessionCookie = await cookies().get("session")
 
   if (!sessionCookie) {
     redirect("/login")
